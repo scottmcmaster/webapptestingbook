@@ -1,0 +1,56 @@
+<div class="container">
+	<div>
+		<h1>Weather Search</h1>
+		<form *ngIf="active" (ngSubmit)="onSubmit()"
+			#weatherSearchForm="ngForm">
+			<div class="form-group">
+				<label for="name">City</label> <input type="text"
+					class="form-control" id="city" required [(ngModel)]="model.city"
+					name="city" #city="ngModel">
+				<div [hidden]="city.valid || city.pristine"
+					class="alert alert-danger">City is required</div>
+			</div>
+			<div class="form-group">
+				<label for="country">Country Code</label> <select
+					class="form-control" id="country" required
+					[(ngModel)]="model.country" name="country" #country="ngModel">
+					<option value="">--- Please select a country ---</option>
+					<option value="us">United States</option>
+					<option value="cn">China</option>
+				</select>
+				<div [hidden]="country.valid || country.pristine"
+					class="alert alert-danger">Country is required</div>
+
+			</div>
+			<button type="submit" class="btn btn-default" id="weatherBtn" name="weatherBtn"
+				[disabled]="!weatherSearchForm.form.valid">Get Weather</button>
+		</form>
+	</div>
+
+	<span [hidden]="!errorMessage" class="alert alert-danger" id="errorMessage">
+		City not found
+	</span>
+
+	<table [hidden]="!submitted">
+		<tr>
+			<td>City Name</td>
+			<td id="weatherCityName" [innerHtml]="weather.cityName"></td>
+		</tr>
+		<tr>
+			<td>Humidity</td>
+			<td id="weatherHumidity" [innerHtml]="weather.humidity"></td>
+		</tr>
+		<tr>
+			<td>Pressure</td>
+			<td id="weatherPressure" [innerHtml]="weather.pressure"></td>
+		</tr>
+		<tr>
+			<td>Temperature</td>
+			<td id="weatherTemperature" [innerHtml]="weather.temperature"></td>
+		</tr>
+		<tr>
+			<td>Wind</td>
+			<td id="weatherWind" [innerHtml]="weather.wind"></td>
+		</tr>
+	</table>
+</div>
